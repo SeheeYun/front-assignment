@@ -2,6 +2,12 @@
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  --primary-color: #112d4e;
+  --secondary-color: #3f72af;
+  --background-color: #f9f7f7;
+  --background-color-dark: #dbe2ef;
+  --size-height-header: 64px;
 }
 
 * {
@@ -16,8 +22,8 @@ body {
 }
 
 body {
-  color: #333;
-  background-color: #fff;
+  color: var(--primary-color);
+  background-color: var(--background-color);
 }
 
 a {
