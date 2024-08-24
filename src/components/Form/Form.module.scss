@@ -1,0 +1,19 @@
+.form {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
