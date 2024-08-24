@@ -5,6 +5,11 @@
   font-weight: bold;
   transition: background-color 0.3s;
 
+  &.default {
+    background-color: white;
+    border: 1px solid #ccc;
+  }
+
   &.primary {
     background-color: #b8d5f5;
   }

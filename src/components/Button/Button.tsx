@@ -1,21 +1,23 @@
 import styles from './Button.module.scss';
 
-type Props = {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  theme: 'primary' | 'dangerous';
+  theme?: 'default' | 'primary' | 'dangerous';
   size?: 'small' | 'medium' | 'large';
-  onClick?: () => void;
-};
+}
 
-const Button = ({ children, theme, size = 'medium', onClick }: Props) => {
+export default function Button({
+  children,
+  theme = 'default',
+  size = 'medium',
+  ...props
+}: Props) {
   return (
     <button
       className={`${styles.button} ${styles[theme]} ${styles[size]}`}
-      onClick={onClick}
+      {...props}
     >
       {children}
     </button>
   );
-};
-
-export default Button;
+}
