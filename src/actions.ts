@@ -1,10 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { Todo } from './types/data';
 
-export async function createTodo(data: FormData) {
-  const title = data.get('title');
-  const content = data.get('content');
+export async function createTodo(formData: FormData) {
+  const title = formData.get('title');
+  const content = formData.get('content');
 
   await fetch('http://localhost:3001/todos', {
     method: 'POST',
@@ -18,20 +19,27 @@ export async function createTodo(data: FormData) {
   revalidatePath('/todos');
 }
 
-export async function updateTodo(prev: any, data: FormData) {
-  const id = data.get('id');
-  const title = data.get('title');
-  const content = data.get('content');
-  const completed = data.get('completed') === 'true';
+export async function updateTodo(todo: Todo, formData: FormData) {
+  const id = formData.get('id');
+  const title = formData.get('title');
+  const content = formData.get('content');
   const params = {
-    ...prev,
+    ...todo,
     title,
     content,
-    completed,
   };
   await fetch(`http://localhost:3001/todos/${id}`, {
     method: 'PUT',
     body: JSON.stringify(params),
+  });
+
+  revalidatePath('/todos');
+}
+
+export async function toggleTodoCompleted(todo: Todo) {
+  await fetch(`http://localhost:3001/todos/${todo.id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ ...todo, completed: !todo.completed }),
   });
 
   revalidatePath('/todos');
