@@ -15,7 +15,7 @@ interface Props {
 export default function EditFormDialog({ trigger, title, todo }: Props) {
   const [open, setOpen] = useState(false);
 
-  const onSubmit = async (formData: FormData) => {
+  const handleSubmit = async (formData: FormData) => {
     try {
       await updateTodo(todo, formData);
       setOpen(false);
@@ -31,7 +31,11 @@ export default function EditFormDialog({ trigger, title, todo }: Props) {
       open={open}
       onOpenChange={open => setOpen(open)}
     >
-      <Form data={todo} onCancel={() => setOpen(false)} onSubmit={onSubmit} />
+      <Form
+        data={todo}
+        onCancel={() => setOpen(false)}
+        onSubmit={handleSubmit}
+      />
     </Dialog>
   );
 }

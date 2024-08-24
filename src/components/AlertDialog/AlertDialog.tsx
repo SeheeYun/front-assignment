@@ -5,10 +5,10 @@ import Button from '../Button';
 interface Props {
   trigger: React.ReactNode;
   children: React.ReactNode;
-  title: string;
+  action?: React.ReactNode;
 }
 
-export default function AlertDialog({ trigger, children, title }: Props) {
+export default function AlertDialog({ trigger, children, action }: Props) {
   return (
     <AlertDialogPrimitive.Root>
       <AlertDialogPrimitive.Trigger asChild>
@@ -17,21 +17,14 @@ export default function AlertDialog({ trigger, children, title }: Props) {
       <AlertDialogPrimitive.Portal>
         <AlertDialogPrimitive.Overlay className="AlertDialogOverlay" />
         <AlertDialogPrimitive.Content className="AlertDialogContent">
-          <AlertDialogPrimitive.Title className="AlertDialogTitle">
-            {title}
-          </AlertDialogPrimitive.Title>
           <AlertDialogPrimitive.Description className="AlertDialogDescription">
             {children}
           </AlertDialogPrimitive.Description>
           <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
             <AlertDialogPrimitive.Cancel asChild>
-              <Button>취소</Button>
+              <Button>닫기</Button>
             </AlertDialogPrimitive.Cancel>
-            <AlertDialogPrimitive.Action asChild>
-              <Button type="submit" theme="primary">
-                확인
-              </Button>
-            </AlertDialogPrimitive.Action>
+            {action && action}
           </div>
         </AlertDialogPrimitive.Content>
       </AlertDialogPrimitive.Portal>

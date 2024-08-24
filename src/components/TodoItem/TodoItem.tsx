@@ -4,6 +4,7 @@ import Button from '../Button';
 import Checkbox from '../Checkbox';
 import styles from './TodoItem.module.scss';
 import EditFormDialog from '../EditFormDialog';
+import DeleteAlertDialog from '../DeleteAlertDialog';
 
 interface Props {
   todo: Todo;
@@ -24,12 +25,10 @@ export default function TodoItem({ todo }: Props) {
             trigger={<Button>수정</Button>}
             title="Todo 수정하기"
           />
-          <AlertDialog
+          <DeleteAlertDialog
+            id={id}
             trigger={<Button theme="dangerous">삭제</Button>}
-            title="Example Dialog"
-          >
-            content
-          </AlertDialog>
+          />
         </div>
       </div>
       <div>
