@@ -1,4 +1,6 @@
 .header {
+  position: sticky;
+  top: 0;
   padding: 0 16px;
   height: var(--size-height-header);
   display: flex;
