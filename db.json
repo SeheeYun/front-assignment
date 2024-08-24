@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Next.js 14 학습",
+      "content": "Next.js의 App Router에 대해 공부하고 예제 만들어보기",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "TypeScript 복습",
+      "content": "제네릭과 유틸리티 타입에 대해 복습하기",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "Todo 리스트 프로젝트 완성",
+      "content": "요구사항에 맞춰 Todo 리스트 기능 구현 및 스타일링 작업",
+      "completed": false
+    }
+  ]
+}
