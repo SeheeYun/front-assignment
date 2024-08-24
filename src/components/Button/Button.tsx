@@ -3,8 +3,8 @@ import styles from './Button.module.scss';
 type Props = {
   children: React.ReactNode;
   theme: 'primary' | 'dangerous';
-  size: 'small' | 'medium' | 'large';
-  onClick: () => void;
+  size?: 'small' | 'medium' | 'large';
+  onClick?: () => void;
 };
 
 const Button = ({ children, theme, size = 'medium', onClick }: Props) => {
