@@ -15,11 +15,29 @@ export default async function TodoListPage() {
 
   return (
     <>
-      <ul>
-        {todos.map(todo => {
-          return <TodoItem key={todo.id} todo={todo} />;
-        })}
-      </ul>
+      {!todos ||
+        (todos.length === 0 && (
+          <div className={styles.placeholder}>
+            <h2>Todo를 추가해보세요!</h2>
+            <AddFormDialog
+              trigger={
+                <Button size="large" theme="primary">
+                  추가하기
+                </Button>
+              }
+              title="Todo 추가하기"
+            />
+          </div>
+        ))}
+
+      {todos?.length > 0 && (
+        <ul>
+          {todos.map(todo => {
+            return <TodoItem key={todo.id} todo={todo} />;
+          })}
+        </ul>
+      )}
+
       <div className={styles.button_wrapper}>
         <div className={styles.button}>
           <AddFormDialog

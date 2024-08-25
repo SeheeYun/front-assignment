@@ -15,7 +15,7 @@ export default async function TodoPage({ params }: { params: { id: string } }) {
   const todo = await fetchTodo(params.id);
 
   if (!todo) {
-    return <div>Todo not found</div>;
+    return <div>일치하는 Todo가 없습니다.</div>;
   }
 
   const { id, title, content, completed } = todo;

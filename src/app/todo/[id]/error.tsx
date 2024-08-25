@@ -11,7 +11,10 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // 추가적인 에러 로깅 처리 로직을 작성할 수 있습니다.
+    /**
+     * 에러가 발생했을 때, 여기에 추가적인 에러 로깅 처리 로직을 작성할 수 있습니다.
+     */
+
     console.error(error);
   }, [error]);
 

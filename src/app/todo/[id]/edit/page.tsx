@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './page.module.scss';
 import { Todo } from '@/types/data';
 import Form from '@/components/Form';
 import { updateTodo } from '@/actions';
