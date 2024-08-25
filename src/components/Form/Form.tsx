@@ -12,7 +12,7 @@ interface Props {
     title: string;
     content: string;
   };
-  onSubmit: (formData: FormData) => void;
+  onSubmit: (formData: FormData) => Promise<void>;
   onCancel: () => void;
   onIsDirtyChange?: (isDirty: boolean) => void;
 }
