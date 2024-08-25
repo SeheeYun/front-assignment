@@ -17,8 +17,13 @@ interface Props {
 export default function Form({ data, onCancel, onSubmit }: Props) {
   const { pending } = useFormStatus();
 
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    onCancel();
+  };
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} action={onSubmit}>
       {data?.id && <input type="hidden" name="id" value={data?.id} />}
       <input
         type="text"
@@ -38,13 +43,8 @@ export default function Form({ data, onCancel, onSubmit }: Props) {
         defaultValue={data?.content}
       />
       <div className={styles.button_wrapper}>
-        <Button onClick={onCancel}>취소</Button>
-        <Button
-          type="submit"
-          theme="primary"
-          disabled={pending}
-          formAction={onSubmit}
-        >
+        <Button onClick={handleCancel}>취소</Button>
+        <Button type="submit" theme="primary" disabled={pending}>
           등록
         </Button>
       </div>
