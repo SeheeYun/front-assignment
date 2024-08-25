@@ -3,17 +3,27 @@ import './styles.css';
 import Button from '../Button';
 
 interface Props {
-  trigger: React.ReactNode;
   children: React.ReactNode;
-  action?: React.ReactNode;
+  trigger?: React.ReactNode;
+  actionButton?: React.ReactNode;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export default function AlertDialog({ trigger, children, action }: Props) {
+export default function AlertDialog({
+  trigger,
+  children,
+  actionButton,
+  open,
+  onOpenChange,
+}: Props) {
   return (
-    <AlertDialogPrimitive.Root>
-      <AlertDialogPrimitive.Trigger asChild>
-        {trigger}
-      </AlertDialogPrimitive.Trigger>
+    <AlertDialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+      {trigger && (
+        <AlertDialogPrimitive.Trigger asChild>
+          {trigger}
+        </AlertDialogPrimitive.Trigger>
+      )}
       <AlertDialogPrimitive.Portal>
         <AlertDialogPrimitive.Overlay className="AlertDialogOverlay" />
         <AlertDialogPrimitive.Content className="AlertDialogContent">
@@ -24,7 +34,7 @@ export default function AlertDialog({ trigger, children, action }: Props) {
             <AlertDialogPrimitive.Cancel asChild>
               <Button>닫기</Button>
             </AlertDialogPrimitive.Cancel>
-            {action && action}
+            {actionButton && actionButton}
           </div>
         </AlertDialogPrimitive.Content>
       </AlertDialogPrimitive.Portal>

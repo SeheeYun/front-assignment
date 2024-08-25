@@ -5,6 +5,7 @@ import AlertDialog from '../AlertDialog';
 import Button from '../Button';
 import { useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface Props {
   id: string;
@@ -19,6 +20,7 @@ export default function DeleteAlertDialog({
 }: Props) {
   const { pending } = useFormStatus();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
     try {
@@ -32,7 +34,7 @@ export default function DeleteAlertDialog({
   return (
     <AlertDialog
       trigger={trigger}
-      action={
+      actionButton={
         <form action={handleSubmit}>
           <input type="hidden" name="id" value={id} />
           <Button theme="dangerous" type="submit" disabled={pending}>
@@ -40,6 +42,8 @@ export default function DeleteAlertDialog({
           </Button>
         </form>
       }
+      open={open}
+      onOpenChange={open => setOpen(open)}
     >
       Todo를 정말 삭제하시겠습니까?
     </AlertDialog>

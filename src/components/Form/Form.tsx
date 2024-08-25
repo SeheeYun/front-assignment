@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState, useEffect, useCallback } from 'react';
 import { useFormStatus } from 'react-dom';
 import Button from '../Button';
 import styles from './Form.module.scss';
@@ -12,15 +13,43 @@ interface Props {
   };
   onSubmit: (formData: FormData) => void;
   onCancel: () => void;
+  onIsDirtyChange?: (isDirty: boolean) => void;
 }
 
-export default function Form({ data, onCancel, onSubmit }: Props) {
+export default function Form({
+  data,
+  onCancel,
+  onSubmit,
+  onIsDirtyChange,
+}: Props) {
   const { pending } = useFormStatus();
 
-  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    onCancel();
+  const [formData, setFormData] = useState({
+    title: data?.title || '',
+    content: data?.content || '',
+  });
+
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      onCancel();
+    },
+    [onCancel]
+  );
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!onIsDirtyChange) return;
+    const isDirty =
+      formData.title !== data?.title || formData.content !== data?.content;
+    onIsDirtyChange(isDirty);
+  }, [formData, data, onIsDirtyChange]);
 
   return (
     <form className={styles.form} action={onSubmit}>
@@ -32,7 +61,8 @@ export default function Form({ data, onCancel, onSubmit }: Props) {
         required
         autoFocus
         className={`${styles.input}`}
-        defaultValue={data?.title}
+        value={formData.title}
+        onChange={handleChange}
       />
       <textarea
         name="content"
@@ -40,7 +70,8 @@ export default function Form({ data, onCancel, onSubmit }: Props) {
         required
         rows={10}
         className={`${styles.input}`}
-        defaultValue={data?.content}
+        value={formData.content}
+        onChange={handleChange}
       />
       <div className={styles.button_wrapper}>
         <Button onClick={handleCancel}>취소</Button>

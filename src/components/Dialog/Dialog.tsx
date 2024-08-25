@@ -1,7 +1,7 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import './styles.css';
 
-export interface DialogProps {
+interface Props {
   trigger: React.ReactNode;
   children: React.ReactNode;
   title: string;
@@ -15,7 +15,7 @@ export default function Dialog({
   title,
   open,
   onOpenChange,
-}: DialogProps) {
+}: Props) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>
