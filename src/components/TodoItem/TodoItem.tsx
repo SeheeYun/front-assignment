@@ -1,10 +1,11 @@
 import { Todo } from '@/types/data';
-import AlertDialog from '../AlertDialog';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import styles from './TodoItem.module.scss';
 import EditFormDialog from '../EditFormDialog';
 import DeleteAlertDialog from '../DeleteAlertDialog';
+import Icon from '../Icon';
+import Link from 'next/link';
 
 interface Props {
   todo: Todo;
@@ -29,10 +30,15 @@ export default function TodoItem({ todo }: Props) {
             id={id}
             trigger={<Button theme="dangerous">삭제</Button>}
           />
+          <Link href={`/todo/${id}`}>
+            <Icon name="chevron-right" width={30} height={30} />
+          </Link>
         </div>
       </div>
       <div>
-        <p>{content}</p>
+        <p className={styles.ellipsis} style={{ WebkitLineClamp: 2 }}>
+          {content}
+        </p>
       </div>
     </li>
   );
