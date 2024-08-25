@@ -20,11 +20,15 @@ export default async function TodoPage({ params }: { params: { id: string } }) {
 
   const { id, title, content, completed } = todo;
   return (
-    <main className={styles.main}>
+    <>
       <div className={`${styles.flex} ${styles.header}`}>
         <div className={styles.flex}>
           <Checkbox todo={todo} />
-          <h2 className={completed ? styles.completed : ''}>{title}</h2>
+          <h2
+            className={`${styles.title} ${completed ? styles.completed : ''}`}
+          >
+            {title}
+          </h2>
         </div>
         <div className={styles.flex}>
           <Button size="large">
@@ -44,6 +48,6 @@ export default async function TodoPage({ params }: { params: { id: string } }) {
       <div className={styles.content}>
         <p>{content}</p>
       </div>
-    </main>
+    </>
   );
 }

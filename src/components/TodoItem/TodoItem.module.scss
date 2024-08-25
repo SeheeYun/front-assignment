@@ -1,4 +1,5 @@
 .li {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -17,6 +18,10 @@
 
 .header {
   justify-content: space-between;
+}
+
+.title {
+  font-size: var(--size-title);
 }
 
 .completed {

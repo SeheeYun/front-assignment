@@ -14,8 +14,8 @@ export default async function TodoListPage() {
   const todos = await fetchTodos();
 
   return (
-    <main>
-      <ul className={styles.ul}>
+    <>
+      <ul>
         {todos.map(todo => {
           return <TodoItem key={todo.id} todo={todo} />;
         })}
@@ -32,6 +32,6 @@ export default async function TodoListPage() {
           />
         </div>
       </div>
-    </main>
+    </>
   );
 }

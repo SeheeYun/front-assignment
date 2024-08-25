@@ -18,7 +18,13 @@ export default function TodoItem({ todo }: Props) {
       <div className={`${styles.flex} ${styles.header}`}>
         <div className={styles.flex}>
           <Checkbox todo={todo} />
-          <h2 className={completed ? styles.completed : ''}>{title}</h2>
+          <h2
+            className={`${styles.ellipsis} ${styles.title} ${
+              completed ? styles.completed : ''
+            }`}
+          >
+            {title}
+          </h2>
         </div>
         <div className={styles.flex}>
           <EditFormDialog

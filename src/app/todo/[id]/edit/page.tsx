@@ -54,15 +54,13 @@ export default function EditTodoPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <main className={styles.main}>
-        <h2>Todo 수정하기</h2>
-        <Form
-          data={todo}
-          onCancel={handleCancel}
-          onSubmit={handleSubmit}
-          onIsDirtyChange={setIsDirty}
-        />
-      </main>
+      <h2>Todo 수정하기</h2>
+      <Form
+        data={todo}
+        onCancel={handleCancel}
+        onSubmit={handleSubmit}
+        onIsDirtyChange={setIsDirty}
+      />
       <AlertDialog
         open={openAlert}
         onOpenChange={open => setOpenAlert(open)}
