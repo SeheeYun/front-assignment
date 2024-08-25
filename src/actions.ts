@@ -4,6 +4,11 @@ import { revalidatePath } from 'next/cache';
 import { Todo } from './types/data';
 
 export async function createTodo(formData: FormData) {
+  /**
+   * 가상의 로딩 시간 추가
+   */
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
   const title = formData.get('title');
   const content = formData.get('content');
 
@@ -46,6 +51,11 @@ export async function toggleTodoCompleted(todo: Todo) {
 }
 
 export async function deleteTodo(formData: FormData) {
+  /**
+   * 가상의 로딩 시간 추가
+   */
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
   const id = formData.get('id');
   await fetch(`http://localhost:3001/todos/${id}`, {
     method: 'DELETE',

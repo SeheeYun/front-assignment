@@ -6,6 +6,7 @@ import Button from '../Button';
 import { useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Spinner from '../Spinner';
 
 interface Props {
   id: string;
@@ -13,12 +14,20 @@ interface Props {
   redirectPath?: string;
 }
 
+function DeleteButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button theme="dangerous" type="submit" disabled={pending}>
+      {pending ? <Spinner width={20} height={20} /> : '삭제'}
+    </Button>
+  );
+}
+
 export default function DeleteAlertDialog({
   id,
   trigger,
   redirectPath,
 }: Props) {
-  const { pending } = useFormStatus();
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -37,9 +46,7 @@ export default function DeleteAlertDialog({
       actionButton={
         <form action={handleSubmit}>
           <input type="hidden" name="id" value={id} />
-          <Button theme="dangerous" type="submit" disabled={pending}>
-            삭제
-          </Button>
+          <DeleteButton />
         </form>
       }
       open={open}
