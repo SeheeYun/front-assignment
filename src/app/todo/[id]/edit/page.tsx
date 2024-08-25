@@ -6,9 +6,14 @@ import styles from './page.module.scss';
 import { Todo } from '@/types/data';
 import Form from '@/components/Form';
 import { updateTodo } from '@/actions';
+import Button from '@/components/Button';
+import AlertDialog from '@/components/AlertDialog';
 
 export default function EditTodoPage({ params }: { params: { id: string } }) {
   const [todo, setTodo] = useState<Todo | null>(null);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
+
   const router = useRouter();
 
   const handleBack = () => {
@@ -26,6 +31,14 @@ export default function EditTodoPage({ params }: { params: { id: string } }) {
     }
   };
 
+  const handleCancel = () => {
+    if (isDirty) {
+      setOpenAlert(true);
+      return;
+    }
+    handleBack();
+  };
+
   useEffect(() => {
     const fetchTodo = async () => {
       const res = await fetch(`http://localhost:3001/todos/${params.id}`);
@@ -40,9 +53,27 @@ export default function EditTodoPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className={styles.main}>
-      <h1>Todo 수정</h1>
-      <Form data={todo} onCancel={handleBack} onSubmit={handleSubmit} />
-    </main>
+    <>
+      <main className={styles.main}>
+        <h2>Todo 수정하기</h2>
+        <Form
+          data={todo}
+          onCancel={handleCancel}
+          onSubmit={handleSubmit}
+          onIsDirtyChange={setIsDirty}
+        />
+      </main>
+      <AlertDialog
+        open={openAlert}
+        onOpenChange={open => setOpenAlert(open)}
+        actionButton={
+          <Button theme="primary" onClick={handleBack}>
+            확인
+          </Button>
+        }
+      >
+        변경사항이 있습니다. 정말로 닫으시겠습니까?
+      </AlertDialog>
+    </>
   );
 }
