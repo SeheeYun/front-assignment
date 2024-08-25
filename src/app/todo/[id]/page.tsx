@@ -35,6 +35,7 @@ export default async function TodoPage({ params }: { params: { id: string } }) {
           <DeleteAlertDialog
             id={id}
             trigger={<Button theme="dangerous">삭제</Button>}
+            redirectPath="/todo-list"
           />
         </div>
       </div>
