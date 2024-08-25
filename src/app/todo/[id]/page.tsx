@@ -6,7 +6,9 @@ import DeleteAlertDialog from '@/components/DeleteAlertDialog';
 import Link from 'next/link';
 
 async function fetchTodo(id: string) {
-  const res = await fetch(`http://localhost:3001/todos/${id}`);
+  const res = await fetch(`http://localhost:3001/todos/${id}`, {
+    next: { revalidate: 0 },
+  });
   const todo: Todo = await res.json();
   return todo;
 }

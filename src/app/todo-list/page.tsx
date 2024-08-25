@@ -5,7 +5,9 @@ import TodoItem from '@/components/TodoItem';
 import AddFormDialog from '@/components/AddFormDialog';
 
 async function fetchTodos() {
-  const res = await fetch('http://localhost:3001/todos');
+  const res = await fetch('http://localhost:3001/todos', {
+    next: { revalidate: 0 },
+  });
   const todos: Todo[] = await res.json();
   return todos;
 }
@@ -15,20 +17,19 @@ export default async function TodoListPage() {
 
   return (
     <>
-      {!todos ||
-        (todos.length === 0 && (
-          <div className={styles.placeholder}>
-            <h2>Todo를 추가해보세요!</h2>
-            <AddFormDialog
-              trigger={
-                <Button size="large" theme="primary">
-                  추가하기
-                </Button>
-              }
-              title="Todo 추가하기"
-            />
-          </div>
-        ))}
+      {(!todos || todos.length === 0) && (
+        <div className={styles.placeholder}>
+          <h2>Todo를 추가해보세요!</h2>
+          <AddFormDialog
+            trigger={
+              <Button size="large" theme="primary">
+                추가하기
+              </Button>
+            }
+            title="Todo 추가하기"
+          />
+        </div>
+      )}
 
       {todos?.length > 0 && (
         <ul>
